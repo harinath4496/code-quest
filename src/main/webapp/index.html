@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CodeQuest – Programming Learning Game</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Module 1: Consistent Dark Gaming Navigation Bar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-icon">&#x2694;&#xFE0F;</span>
+            <span>CodeQuest</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Home</a></li>
+            <li><a href="register.jsp">Student Register</a></li>
+            <li><a href="login.jsp">Student Login</a></li>
+            <li><a href="admin-login.jsp">Admin Portal</a></li>
+            <li><a href="MissionServlet">Programming Missions</a></li>
+            <li><a href="LeaderboardServlet">Leaderboard</a></li>
+        </ul>
+        <div class="nav-user">
+            <a href="register.jsp" class="btn btn-primary btn-sm">&#x1F680; Start Quest</a>
+        </div>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <main class="main-content">
+        <section class="hero">
+            <span class="hero-badge">&#x1F525; Level Up Your Coding Skills</span>
+            <h1 class="hero-title">Code. Conquer. Rank Up.</h1>
+            <p class="hero-desc">
+                Welcome to <strong>CodeQuest</strong>, a game-based programming learning realm where you conquer coding missions across Java, SQL, and Data Structures, earn XP, level up, and battle your way to the top of the global leaderboard.
+            </p>
+            <div class="hero-actions">
+                <a href="register.jsp" class="btn btn-primary btn-lg">&#x2694;&#xFE0F; Create Player Account</a>
+                <a href="login.jsp" class="btn btn-outline btn-lg">&#x1F511; Student Login</a>
+                <a href="LeaderboardServlet" class="btn btn-outline btn-lg">&#x1F3C6; View Rankings</a>
+            </div>
+        </section>
+
+        <!-- Feature Modules Section -->
+        <section class="features-grid">
+            <div class="feature-box">
+                <div class="feature-icon">&#x2615;</div>
+                <h3>Java Missions</h3>
+                <p>Master Core Java concepts, JVM internals, memory architectures, threading, OOP, and concurrency through curated gamified challenges.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">&#x1F4BE;</div>
+                <h3>SQL Quests</h3>
+                <p>Level up your database mastery: complex joins, aggregate filters, transaction ACID properties, and query optimization.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">&#x1F9E0;</div>
+                <h3>DSA Expeditions</h3>
+                <p>Sharpen algorithmic intuition with binary trees, graph traversals, dynamic programming, and asymptotic complexity puzzles.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">&#x1F3C6;</div>
+                <h3>Global Leaderboard</h3>
+                <p>Compete in real time against fellow coders. Climb from Novice (Level 1) to Grandmaster as you accumulate Experience Points.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">&#x1F6E1;&#xFE0F;</div>
+                <h3>Admin Command Center</h3>
+                <p>Dedicated Admin dashboard for instructors to author, configure, and inspect programming challenges with dynamic XP rewards.</p>
+            </div>
+            <div class="feature-box">
+                <div class="feature-icon">&#x26A1;</div>
+                <h3>Instant Evaluation</h3>
+                <p>Atomic database-backed answer evaluation with guaranteed transaction safety and real-time level calculation.</p>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>&copy; 2026 CodeQuest &bull; Java Jakarta Servlets &bull; JSP Scriptlets &bull; JDBC &bull; MySQL &bull; Apache Tomcat 10.1</p>
+    </footer>
+
+</body>
+</html>
