@@ -3,14 +3,20 @@
 <%@ page import="com.codequest.model.Mission" %>
 <%@ page import="java.util.List" %>
 <%
-    Admin admin = (session != null) ? (Admin) session.getAttribute("admin") : null;
+    Admin admin = (session != null) ? (Admin) session.getAttribute("adminUser") : null;
+    if (admin == null && session != null) {
+        admin = (Admin) session.getAttribute("admin");
+    }
     if (admin == null) {
         response.sendRedirect("admin-login.jsp?error=Please+authenticate+as+administrator");
         return;
     }
 
     @SuppressWarnings("unchecked")
-    List<Mission> questions = (List<Mission>) request.getAttribute("questions");
+    List<Mission> questions = (List<Mission>) request.getAttribute("missionsList");
+    if (questions == null) {
+        questions = (List<Mission>) request.getAttribute("questions");
+    }
     if (questions == null) {
         response.sendRedirect("ViewQuestionsServlet");
         return;

@@ -1,7 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="com.codequest.model.Admin" %>
 <%
-    Admin admin = (session != null) ? (Admin) session.getAttribute("admin") : null;
+    Admin admin = (session != null) ? (Admin) session.getAttribute("adminUser") : null;
+    if (admin == null && session != null) {
+        admin = (Admin) session.getAttribute("admin");
+    }
     if (admin == null) {
         response.sendRedirect("admin-login.jsp?error=Please+authenticate+as+administrator");
         return;

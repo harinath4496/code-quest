@@ -39,5 +39,6 @@ public class LeaderboardEntry implements Serializable {
     public void setCompletedMissions(int completedMissions) { this.completedMissions = completedMissions; }
 
     public int getTotalXp() { return totalXp; }
+    public int getXp() { return totalXp; }
     public void setTotalXp(int totalXp) { this.totalXp = totalXp; }
 }

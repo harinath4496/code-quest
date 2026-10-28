@@ -3,7 +3,10 @@
 <%@ page import="com.codequest.model.LeaderboardEntry" %>
 <%@ page import="java.util.List" %>
 <%
-    User sessionUser = (session != null) ? (User) session.getAttribute("user") : null;
+    User sessionUser = (session != null) ? (User) session.getAttribute("studentUser") : null;
+    if (sessionUser == null && session != null) {
+        sessionUser = (User) session.getAttribute("user");
+    }
 
     @SuppressWarnings("unchecked")
     List<LeaderboardEntry> leaderboard = (List<LeaderboardEntry>) request.getAttribute("leaderboard");
@@ -106,7 +109,7 @@
                                     <%= entry.getCompletedMissions() %>
                                 </td>
                                 <td style="font-family: var(--font-mono); font-weight: 700; color: #fbbf24;">
-                                    <%= entry.getXp() %> XP
+                                    <%= entry.getTotalXp() %> XP
                                 </td>
                             </tr>
                         <%

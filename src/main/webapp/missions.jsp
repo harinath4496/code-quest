@@ -2,24 +2,28 @@
 <%@ page import="com.codequest.model.User" %>
 <%@ page import="com.codequest.model.Mission" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.Set" %>
 <%
-    User user = (session != null) ? (User) session.getAttribute("user") : null;
+    User user = (session != null) ? (User) session.getAttribute("studentUser") : null;
+    if (user == null && session != null) {
+        user = (User) session.getAttribute("user");
+    }
     if (user == null) {
         response.sendRedirect("login.jsp?error=Please+login+to+access+programming+missions");
         return;
     }
 
     @SuppressWarnings("unchecked")
-    List<Mission> missions = (List<Mission>) request.getAttribute("missions");
+    List<Mission> missions = (List<Mission>) request.getAttribute("missionsList");
+    if (missions == null) {
+        missions = (List<Mission>) request.getAttribute("missions");
+    }
     if (missions == null) {
         response.sendRedirect("MissionServlet");
         return;
     }
 
-    @SuppressWarnings("unchecked")
-    Set<Integer> solvedMissionIds = (Set<Integer>) request.getAttribute("solvedMissionIds");
-    String selectedCategory = (String) request.getAttribute("selectedCategory");
+    String selectedCategory = (String) request.getAttribute("activeCategory");
+    if (selectedCategory == null) selectedCategory = (String) request.getAttribute("selectedCategory");
     if (selectedCategory == null) selectedCategory = "ALL";
 %>
 <!DOCTYPE html>
@@ -71,10 +75,8 @@
         <!-- Missions List -->
         <div class="missions-grid">
             <%
-                int index = 0;
                 for (Mission m : missions) {
-                    index++;
-                    boolean isSolved = (solvedMissionIds != null && solvedMissionIds.contains(m.getId()));
+                    boolean isSolved = m.isSolvedByCurrentUser();
 
                     String catBadge = "badge-java";
                     if ("SQL".equalsIgnoreCase(m.getCategory())) catBadge = "badge-sql";
@@ -106,40 +108,40 @@
                     </div>
 
                     <form action="SubmitAnswerServlet" method="post">
-                        <input type="hidden" name="missionId" value="<%= m.getId() %>">
+                        <input type="hidden" name="mission_id" value="<%= m.getId() %>">
 
                         <div class="options-grid">
                             <label class="option-label">
-                                <input type="radio" name="selectedOption" value="A" required>
+                                <input type="radio" name="selected_option" value="A" required>
                                 <span class="option-letter">A</span>
                                 <span><%= m.getOptionA() %></span>
                             </label>
 
                             <label class="option-label">
-                                <input type="radio" name="selectedOption" value="B" required>
+                                <input type="radio" name="selected_option" value="B" required>
                                 <span class="option-letter">B</span>
                                 <span><%= m.getOptionB() %></span>
                             </label>
 
                             <label class="option-label">
-                                <input type="radio" name="selectedOption" value="C" required>
+                                <input type="radio" name="selected_option" value="C" required>
                                 <span class="option-letter">C</span>
                                 <span><%= m.getOptionC() %></span>
                             </label>
 
                             <label class="option-label">
-                                <input type="radio" name="selectedOption" value="D" required>
+                                <input type="radio" name="selected_option" value="D" required>
                                 <span class="option-letter">D</span>
                                 <span><%= m.getOptionD() %></span>
                             </label>
                         </div>
 
                         <div style="display: flex; justify-content: space-between; align-items: center;">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <%= isSolved ? "Retry Mission" : "Submit Answer" %>
+                            <button type="submit" class="btn btn-primary btn-sm" <%= isSolved ? "disabled style='opacity:0.6; cursor:not-allowed;'" : "" %>>
+                                <%= isSolved ? "Completed ✓" : "Submit Answer" %>
                             </button>
                             <span style="font-size: 0.8rem; color: var(--text-muted);">
-                                Single choice • Instant verification
+                                <%= isSolved ? "Reward already claimed" : "Single choice • Instant XP evaluation" %>
                             </span>
                         </div>
                     </form>
